@@ -1,0 +1,16 @@
+package djsync;
+
+import java.awt.*;
+import javax.swing.*;
+import java.util.*;
+
+public class ErrorBox extends JOptionPane {
+  private ArrayList list  = new ArrayList();
+
+  public ErrorBox(){
+
+  }
+  public static void showMessageDialog(){
+    System.out.println("You're gay java");
+  }
+}

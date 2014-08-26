@@ -1,0 +1,20 @@
+package djsync;
+
+import java.util.*;
+
+public class HelloWorld {
+
+  public HelloWorld(){
+
+  }
+  public native void displayHelloWorld();
+
+  static{
+    System.loadLibrary("hello");
+  }
+
+  public static void main(String[] args){
+    new Sync().displayHelloWorld();
+  }
+
+}

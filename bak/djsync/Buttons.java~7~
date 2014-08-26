@@ -1,0 +1,22 @@
+package djsync;
+
+import javax.swing.*;
+import java.awt.event.*;
+
+public class Buttons extends AbstractButton {
+
+  public Buttons(){
+
+  }
+  public void setupIcons(Icon def,Icon pressed){
+    this.setIcon(def);
+//    this.setRolloverEnabled(true);
+//    this.setRolloverIcon(rollover);
+    if(pressed==null){
+      System.out.println("pressed is null");
+    }
+//    this.setPressedIcon(pressed);
+    this.setEnabled(true);
+  }
+
+}

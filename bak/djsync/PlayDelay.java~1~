@@ -1,0 +1,24 @@
+package djsync;
+
+import java.util.*;
+
+public class PlayDelay {
+  private Timer t;
+  private long currentTime = System.currentTimeMillis();
+  private DJSync sync;
+
+  public PlayDelay(DJSync sync){
+    this.sync = sync;
+    Date d = new Date();
+    d.setTime(currentTime);
+    System.out.println("Current time: " + currentTime + " getTime: " + d.getTime());
+  }
+  public void startPlay(){
+    t = new Timer();
+    t.schedule(new TimerTask(){
+      public void run(){
+        sync.startPlayback();
+      }
+    },2000L);
+  }
+}

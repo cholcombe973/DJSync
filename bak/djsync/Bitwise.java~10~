@@ -1,0 +1,160 @@
+package djsync;
+
+public class Bitwise  {
+  private static final int play = 1;
+  private static final int stop = 2;
+  private static final int previous = 4;
+  private static final int next = 8;
+  private static final int pause = 16;
+  private static final int restart = 32;
+  private static final int shuffle = 64;
+  private static final int repeat = 128;
+  private static final int fadeAndStop = 256;
+  private int flags = 0;
+
+  public void setPlayFlag(boolean playFlag){
+    if(playFlag){
+      if(isSettable()){
+        System.out.println("isSettable returned true for playFlag");
+        flags = flags | play;
+      }
+    }
+  }
+  public boolean isPlayOn(){
+    if ((flags & play) == play) {
+      return true;
+    }
+    return false;
+  }
+  private boolean isSettable(){
+    //this is going to need an if/else tree structure.  i don't think switch will work on this
+    boolean result = false;
+    if((flags & stop)==stop){
+      result = false;
+    }
+    else if((flags & play)==play){
+      result = false;
+    }
+    else if((flags & previous)==previous){
+      result = false;
+    }
+    else if((flags & next)==next){
+      result = false;
+    }
+    else if((flags & pause)==pause){
+      result = false;
+    }
+    else if((flags & restart)==restart){
+      result = false;
+    }
+    else if((flags & shuffle)==shuffle){
+      result = false;
+    }
+    else if((flags & repeat)==repeat){
+      result = false;
+    }
+    else if((flags & fadeAndStop)==fadeAndStop){
+      result = false;
+    }
+    else{
+      result = true;
+    }
+    return result;
+  }
+  public void setStopFlag(boolean stopFlag){
+    if(stopFlag){
+      if(isSettable()){
+        System.out.println("isSettable returned true for stopFlag");
+        flags = flags | stop;
+      }else{
+        System.out.println("isSettable returned false for stopFlag");
+      }
+    }
+  }
+  public boolean isStopOn(){
+    if((flags & stop) == stop){
+      return true;
+    }
+    return false;
+  }
+  public void setPreviousFlag(boolean previousFlag){
+    if(previousFlag){
+      flags = flags | previous;
+    }
+  }
+  public boolean isPreviousOn(){
+    if((flags & previous)== previous){
+      return true;
+    }
+    return false;
+  }
+  public void setNextFlag(boolean nextFlag){
+    if(nextFlag){
+      flags = flags | next;
+    }
+  }
+  public boolean isNextOn(){
+    if((flags & next)==next){
+      return true;
+    }
+    return false;
+  }
+  public void setPauseFlag(boolean pauseFlag){
+    if(pauseFlag){
+      flags = flags | pause;
+    }
+  }
+  public boolean isPauseOn(){
+    if((flags & pause)==pause){
+      return true;
+    }
+    return false;
+  }
+  public void setRestartFlag(boolean restartFlag){
+    if(restartFlag){
+      flags = flags | restart;
+    }
+  }
+  public boolean isRestartOn(){
+    if((flags & restart)==restart){
+      return true;
+    }
+    return false;
+  }
+  public void setShuffleFlag(boolean shuffleFlag){
+    if(shuffleFlag){
+      flags = flags | shuffle;
+    }
+  }
+  public boolean isShuffleOn(){
+    if((flags & shuffle)==shuffle){
+      return true;
+    }
+    return false;
+  }
+  public void setRepeatFlag(boolean repeatFlag){
+    if(repeatFlag){
+      flags = flags | repeat;
+    }
+  }
+  public boolean isRepeatOn(){
+    if((flags & repeat)==repeat){
+      return true;
+    }
+    return false;
+  }
+  public void setFadeAndStopFlag(boolean fadeAndStopFlag){
+    if(fadeAndStopFlag){
+      flags = flags | fadeAndStop;
+    }
+  }
+  public boolean isFadeAndStopOn(){
+    if((flags & fadeAndStop)==fadeAndStop){
+      return true;
+    }
+    return false;
+  }
+  public int getPacket(){
+    return flags;
+  }
+}

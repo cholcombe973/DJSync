@@ -1,0 +1,255 @@
+package djsync;
+
+import java.awt.*;
+import java.awt.event.*;
+import javax.swing.*;
+import javax.swing.event.*;
+
+public class Frame1 extends JFrame {
+  private DJSync dj = new DJSync();
+  private JPanel contentPane;
+  private JMenuBar jMenuBar1 = new JMenuBar();
+  private JMenu jMenuFile = new JMenu();
+  private JMenuItem jMenuFileExit = new JMenuItem();
+  private JMenu jMenuHelp = new JMenu();
+  private JMenuItem jMenuHelpAbout = new JMenuItem();
+  private JSlider jSlider1 = new JSlider();
+  private JLabel jLabel1 = new JLabel();
+  private JButton jButtonPlay = new JButton(new ImageIcon("C:\\Documents and Settings\\Chris Holcombe\\My Documents\\My Pictures\\DJButtons\\Play.jpg"));
+  private JButton jButtonFade = new JButton();
+  private JButton jButtonNext = new JButton(new ImageIcon("C:\\Documents and Settings\\Chris Holcombe\\My Documents\\My Pictures\\DJButtons\\Next.jpg"));
+  private JButton jButtonPrevious = new JButton(new ImageIcon("C:\\Documents and Settings\\Chris Holcombe\\My Documents\\My Pictures\\DJButtons\\Previous.jpg"));
+  private JButton jButtonPause = new JButton(new ImageIcon("C:\\Documents and Settings\\Chris Holcombe\\My Documents\\My Pictures\\DJButtons\\Pause.jpg"));
+  private JButton jButtonStop = new JButton(new ImageIcon("C:\\Documents and Settings\\Chris Holcombe\\My Documents\\My Pictures\\DJButtons\\Stop.jpg"));
+  private ImageIcon playBar = new ImageIcon("C:\\Documents and Settings\\Chris Holcombe\\My Documents\\My Pictures\\WinampPlaybar.jpg");
+  private JOptionPane jOption1 = new JOptionPane();
+  private Bitwise bitwise = new Bitwise();
+  private int delay = 0;
+  private ConnectBridge connect = new ConnectBridge(this);
+  private JButton jButtonHandle = new JButton();
+  public boolean connected = false;
+  private JButton jButton1 = new JButton();
+
+  public Frame1() {
+    enableEvents(AWTEvent.WINDOW_EVENT_MASK);
+    try {
+      jbInit();
+    }
+    catch(Exception e) {
+      e.printStackTrace();
+    }
+  }
+  private void jbInit() throws Exception  {
+    contentPane = (JPanel) this.getContentPane();
+    contentPane.setLayout(null);
+    this.setSize(new Dimension(400, 350));
+    this.setTitle("DJOwnage");
+    jMenuFile.setText("File");
+    jMenuFileExit.setText("Exit");
+    jMenuFileExit.addActionListener(new ActionListener()  {
+      public void actionPerformed(ActionEvent e) {
+        jMenuFileExit_actionPerformed(e);
+      }
+    });
+    jMenuHelp.setText("Help");
+    jMenuHelpAbout.setText("About");
+    jMenuHelpAbout.addActionListener(new ActionListener()  {
+      public void actionPerformed(ActionEvent e) {
+        jMenuHelpAbout_actionPerformed(e);
+      }
+    });
+    jSlider1.setBounds(new Rectangle(89, 229, 221, 26));
+    jLabel1.setText("Volume");
+    jLabel1.setBounds(new Rectangle(18, 233, 61, 19));
+    jButtonPlay.setBounds(new Rectangle(135, 116, 23, 19));
+    jButtonPlay.addActionListener(new java.awt.event.ActionListener() {
+      public void actionPerformed(ActionEvent e) {
+        jButtonPlay_actionPerformed(e);
+      }
+    });
+    jButtonPause.setBounds(new Rectangle(158,116,23,19));
+    jButtonPause.addActionListener(new ActionListener(){
+      public void actionPerformed(ActionEvent e){
+        jButtonPause_actionPerformed(e);
+      }
+    });
+    jButtonFade.setBounds(new Rectangle(68, 182, 114, 16));
+    jButtonFade.setText("Fade and Stop");
+    jButtonFade.addActionListener(new java.awt.event.ActionListener() {
+      public void actionPerformed(ActionEvent e) {
+        jButtonFade_actionPerformed(e);
+      }
+    });
+    jButtonNext.setBounds(new Rectangle(204, 116, 24, 19));
+
+    jButtonNext.addActionListener(new java.awt.event.ActionListener() {
+      public void actionPerformed(ActionEvent e) {
+        jButtonNext_actionPerformed(e);
+      }
+    });
+    jButtonPrevious.addActionListener(new java.awt.event.ActionListener() {
+      public void actionPerformed(ActionEvent e) {
+        jButtonPrevious_actionPerformed(e);
+      }
+    });
+    jButtonPrevious.setBounds(new Rectangle(112, 116, 23, 19));
+    jSlider1.addChangeListener(new ChangeListener(){
+      public void stateChanged(ChangeEvent e){
+        jSlider_stateChanged(e);
+      }
+    });
+    jButtonStop.addActionListener(new java.awt.event.ActionListener() {
+      public void actionPerformed(ActionEvent e) {
+        jButtonStop_actionPerformed(e);
+      }
+    });
+    jButtonStop.setBounds(new Rectangle(181, 116, 23, 19));
+    jButtonPlay.setPressedIcon(new ImageIcon("C:\\Documents and Settings\\Chris Holcombe\\My Documents\\My Pictures\\DJButtons\\PlayPressed.jpg"));
+    jButtonStop.setPressedIcon(new ImageIcon("C:\\Documents and Settings\\Chris Holcombe\\My Documents\\My Pictures\\DJButtons\\StopPressed.jpg"));
+    jButtonNext.setPressedIcon(new ImageIcon("C:\\Documents and Settings\\Chris Holcombe\\My Documents\\My Pictures\\DJButtons\\NextPressed.jpg"));
+    jButtonPrevious.setPressedIcon(new ImageIcon("C:\\Documents and Settings\\Chris Holcombe\\My Documents\\My Pictures\\DJButtons\\PreviousPressed.jpg"));
+    jButtonPause.setPressedIcon(new ImageIcon("C:\\Documents and Settings\\Chris Holcombe\\My Documents\\My Pictures\\DJButtons\\PausePressed.jpg"));
+    jButtonHandle.setBounds(new Rectangle(194, 182, 111, 16));
+    jButtonHandle.setText("Find Winamp");
+    jButtonHandle.addActionListener(new java.awt.event.ActionListener() {
+      public void actionPerformed(ActionEvent e) {
+        jButtonHandle_actionPerformed(e);
+      }
+    });
+    jButton1.setBounds(new Rectangle(110, 149, 154, 19));
+    jButton1.setText("Push Me!");
+    jButton1.addActionListener(new java.awt.event.ActionListener() {
+      public void actionPerformed(ActionEvent e) {
+        jButton1_actionPerformed(e);
+      }
+    });
+    jMenuFile.add(jMenuFileExit);
+    jMenuHelp.add(jMenuHelpAbout);
+    jMenuBar1.add(jMenuFile);
+    jMenuBar1.add(jMenuHelp);
+    contentPane.add(jLabel1, null);
+    contentPane.add(jSlider1, null);
+    contentPane.add(jButtonStop, null);
+    contentPane.add(jButtonPlay, null);
+    contentPane.add(jButtonNext, null);
+    contentPane.add(jButtonPrevious, null);
+    contentPane.add(jButtonPause,null);
+    contentPane.add(jButtonFade, null);
+    contentPane.add(jButtonHandle, null);
+    contentPane.add(jButton1, null);
+    this.setJMenuBar(jMenuBar1);
+    jSlider1.setMaximum(255);
+    jSlider1.setMinimum(0);
+    connect.start();
+  }
+  public void jMenuFileExit_actionPerformed(ActionEvent e) {
+    connect.cleanUp();
+    System.exit(0);
+  }
+  public void jMenuHelpAbout_actionPerformed(ActionEvent e) {
+    Frame1_AboutBox dlg = new Frame1_AboutBox(this);
+    Dimension dlgSize = dlg.getPreferredSize();
+    Dimension frmSize = getSize();
+    Point loc = getLocation();
+    dlg.setLocation((frmSize.width - dlgSize.width) / 2 + loc.x, (frmSize.height - dlgSize.height) / 2 + loc.y);
+    dlg.setModal(true);
+    dlg.pack();
+    dlg.show();
+  }
+  protected void processWindowEvent(WindowEvent e) {
+    super.processWindowEvent(e);
+    if (e.getID() == WindowEvent.WINDOW_CLOSING) {
+      jMenuFileExit_actionPerformed(null);
+    }
+  }
+  private void jButtonPlay_actionPerformed(ActionEvent e) {
+    if(connected){
+      PlayDelay playDelay = new PlayDelay(dj,delay);
+      dj.startPlayback();
+      bitwise.setPlayFlag(true);
+      byte packet = bitwise.getPacket();
+      connect.sendPacket(packet);
+      bitwise.resetFlags();
+    }else{
+      JOptionPane.showMessageDialog(jOption1,"You're not connected yet bitch!","Connection Error",JOptionPane.ERROR_MESSAGE);
+    }
+  }
+  private void jButtonNext_actionPerformed(ActionEvent e) {
+    if(connected){
+      dj.nextTrack();
+      bitwise.setNextFlag(true);
+      byte packet = bitwise.getPacket();
+      connect.sendPacket(packet);
+      bitwise.resetFlags();
+    }else{
+      JOptionPane.showMessageDialog(jOption1,"You're not connected yet bitch!","Connection Error",JOptionPane.ERROR_MESSAGE);
+    }
+  }
+
+  private void jButtonPrevious_actionPerformed(ActionEvent e) {
+    if(connected){
+      dj.previousTrack();
+      bitwise.setPreviousFlag(true);
+      byte packet = bitwise.getPacket();
+      connect.sendPacket(packet);
+      bitwise.resetFlags();
+    }else{
+      JOptionPane.showMessageDialog(jOption1,"You're not connected yet bitch!","Connection Error",JOptionPane.ERROR_MESSAGE);
+    }
+
+  }
+  private void jButtonFade_actionPerformed(ActionEvent e) {
+    if(connected){
+      dj.fadeoutAndStop();
+      bitwise.setFadeAndStopFlag(true);
+      byte packet = bitwise.getPacket();
+      connect.sendPacket(packet);
+      bitwise.resetFlags();
+    }else{
+      JOptionPane.showMessageDialog(jOption1,"You're not connected yet bitch!","Connection Error",JOptionPane.ERROR_MESSAGE);
+    }
+  }
+  private void jSlider_stateChanged(ChangeEvent e){
+    int value = jSlider1.getValue();
+    dj.setWinampVolume(value);
+  }
+  private void jButtonStop_actionPerformed(ActionEvent e) {
+    if(connected){
+      dj.stop();
+      bitwise.setStopFlag(true);
+      byte packet = bitwise.getPacket();
+      connect.sendPacket(packet);
+      bitwise.resetFlags();
+    }else{
+      JOptionPane.showMessageDialog(jOption1,"You're not connected yet bitch!","Connection Error",JOptionPane.ERROR_MESSAGE);
+    }
+  }
+  private void jButtonPause_actionPerformed(ActionEvent e){
+    if(connected){
+      dj.pause();
+      bitwise.setPauseFlag(true);
+      byte packet = bitwise.getPacket();
+      connect.sendPacket(packet);
+      bitwise.resetFlags();
+    }else{
+      JOptionPane.showMessageDialog(jOption1,"You're not connected yet bitch!","Connection Error",JOptionPane.ERROR_MESSAGE);
+    }
+  }
+  public void setTimeDelay(int delay){
+    this.delay = delay;
+  }
+  private void jButtonHandle_actionPerformed(ActionEvent e) {
+    if(dj.getWindowHandle()==0){
+      JOptionPane.showMessageDialog(jOption1,"Winamp handle returned null","Winamp Error",JOptionPane.ERROR_MESSAGE);
+    }
+  }
+  private void beep(){
+    Toolkit.getDefaultToolkit().beep();
+  }
+
+  private void jButton1_actionPerformed(ActionEvent e) {
+    connect.syncUp();
+  }
+}
+
+

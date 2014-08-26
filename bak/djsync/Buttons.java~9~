@@ -1,0 +1,25 @@
+package djsync;
+
+import java.awt.*;
+import java.awt.event.*;
+import java.awt.image.*;
+
+import javax.swing.*;
+import javax.swing.event.*;
+
+public class Buttons extends AbstractButton {
+
+  public Buttons(){
+    //    this(def,pressed);
+
+
+  }
+  public void setupIcons(Icon def,Icon pressed){
+    this.setIcon(def);
+    if(pressed==null){
+      System.out.println("pressed is null");
+    }
+
+  }
+
+}

@@ -1,0 +1,20 @@
+package djsync;
+
+import java.util.*;
+
+public class Sync {
+
+  public Sync(){
+
+  }
+  public native void sendPlayMsg();
+
+  static{
+    System.loadLibrary("Sync");
+  }
+
+  public static void main(String[] args){
+    new Sync().sendPlayMsg();
+  }
+
+}
